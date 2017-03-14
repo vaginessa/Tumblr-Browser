@@ -12,8 +12,31 @@ public class Tumblelog {
     private String cname;
     private String[] feeds;
 
+    public String getTitle() {
+        return title;
+    }
 
-//    "title":"BRUNO MARS",
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public String[] getFeeds() {
+        return feeds;
+    }
+
+    //    "title":"BRUNO MARS",
 //            "description":"Bruno Mars Official Tumblr. Submit your That's What I Like Gifs to be featured!",
 //            "name":"brunomars",
 //            "timezone":"US\/Eastern",

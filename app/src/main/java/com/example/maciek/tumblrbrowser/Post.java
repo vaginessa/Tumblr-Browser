@@ -22,7 +22,25 @@ public class Post {
 
     private List<PostDetail> posts;
 
+    public Tumblelog getTumblelog() {
+        return tumblelog;
+    }
 
+    public int getPostStart() {
+        return postStart;
+    }
+
+    public int getPostsTotal() {
+        return postsTotal;
+    }
+
+    public boolean isPostsType() {
+        return postsType;
+    }
+
+    public List<PostDetail> getPosts() {
+        return posts;
+    }
 
 //    {
 //        "tumblelog":{ obiekt },

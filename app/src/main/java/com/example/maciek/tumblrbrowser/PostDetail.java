@@ -10,6 +10,7 @@ public class PostDetail {
     String url;
     String photo;
     String date;
+//    String title;
 
 //    @SerializedName(photo-)
 //    String photoURL;

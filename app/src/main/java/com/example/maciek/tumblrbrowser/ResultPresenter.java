@@ -1,5 +1,9 @@
 package com.example.maciek.tumblrbrowser;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -14,6 +18,7 @@ import nucleus.presenter.Presenter;
 public class ResultPresenter extends Presenter<ResultActivity> {
 
 
+    private String resultRaw;
     private String result;
 
     public String getDataAsync (String title) {
@@ -21,8 +26,10 @@ public class ResultPresenter extends Presenter<ResultActivity> {
             @Override
             public void run() {
                 try {
-                     result =  getData(title).substring(22);
-
+                     resultRaw =  getData(title);
+                    result = resultRaw.substring(22, resultRaw.length()-2);
+//                    Log.d("resultRaw", result);
+                    Gson gson = new Gson();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -41,8 +48,8 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 //            @Override
 //            public void run() {
 //                try {
-//                    String result = getData(title);
-//                    SearchResult searchResult = new Gson().fromJson(result,SearchResult.class); //metoda ktora przetwarza json na model przez nas stwotrzony
+//                    String resultRaw = getData(title);
+//                    SearchResult searchResult = new Gson().fromJson(resultRaw,SearchResult.class); //metoda ktora przetwarza json na model przez nas stwotrzony
 //                    getView().setDataOnUiThread(searchResult, false);
 //                } catch (IOException e) {
 //                    getView().setDataOnUiThread(null, true);

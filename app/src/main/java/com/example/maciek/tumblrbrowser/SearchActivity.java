@@ -37,14 +37,5 @@ public class SearchActivity extends AppCompatActivity {
                 searchEditText.getText().toString()));
     }
 
-//    @OnClick(R.id.search_button)
-//    void onSearchButtonClick(){
-//        int checkRadioId = radioGroup.getCheckedRadioButtonId();
-//        String typeKey = typeCheckBox.isChecked() ? apiKeysMap.get(checkRadioId) : null;
-//        int year = yearCheckBox.isChecked() ? numberPicker.getValue() : ListingActivity.NO_YEAR_SELECTED;
-//
-//        startActivity(ListingActivity.createIntent(SearchActivity.this, editText.getText().toString(),
-//                year, typeKey));
-//    }
 
 }
