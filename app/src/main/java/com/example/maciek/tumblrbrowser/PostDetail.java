@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName;
 public class PostDetail {
 
     String id;
-    String url;
+    @SerializedName("photo-url-400")
+    String photoUrl;
     String date;
     String type;
 
@@ -16,8 +17,13 @@ public class PostDetail {
         return id;
     }
 
-    public String getUrl() {
-        return url;
+//    public String getUrl() {
+//        return url;
+//    }
+
+
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
     public String getDate() {

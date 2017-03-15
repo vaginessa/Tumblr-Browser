@@ -21,8 +21,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHold
 
     private List<PostDetail> postList = Collections.emptyList();
 
-    public void setPostList(List<PostDetail> postList) {
-        this.postList = postList;
+    public void setPostList(List<Post> postList) {
+        this.postList = postList.get(0).getPosts();
         notifyDataSetChanged();
     }
 
@@ -34,8 +34,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(holder.postImage.getContext()).load(postList.get(position).getUrl()).into(holder.postImage);
-        holder.postName.setText(postList.get(position).getUrl());
+        String url = postList.get(position).getPhotoUrl().replace("\\", "");
+        Glide.with(holder.postImage.getContext()).load(url).into(holder.postImage);
+//        holder.postName.setText(postList.get(position).getTumblelog().getName());
     }
 
     @Override

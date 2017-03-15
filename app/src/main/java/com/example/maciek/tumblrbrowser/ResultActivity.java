@@ -52,11 +52,11 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> {
         return intent;
     }
 
-    public void setPostDetailOnMainThread(PostDetail postDetail) {
+    public void setPostDetailOnMainThread(Post post) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.setPostList(Arrays.asList(postDetail));
+                adapter.setPostList(Arrays.asList(post));
             }
         });
     }
