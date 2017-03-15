@@ -43,6 +43,8 @@ public class ResultPresenter extends Presenter<ResultActivity> {
                     Gson gson = new Gson();
                     PostDetail post = gson.fromJson(post1.toString(), PostDetail.class);
 
+                    getView().setPostDetailOnMainThread(post);
+
 
 
                 } catch (IOException e) {

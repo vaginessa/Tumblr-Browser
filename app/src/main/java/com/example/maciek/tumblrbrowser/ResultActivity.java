@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,7 +44,6 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> {
         recyclerView.setAdapter(adapter);
 
         getPresenter().getDataAsync(name);
-
     }
 
     public static Intent createIntent(Context context, String name) {
@@ -52,4 +52,12 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> {
         return intent;
     }
 
+    public void setPostDetailOnMainThread(PostDetail postDetail) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.setPostList(Arrays.asList(postDetail));
+            }
+        });
+    }
 }

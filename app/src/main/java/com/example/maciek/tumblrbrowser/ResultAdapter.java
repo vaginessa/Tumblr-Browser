@@ -19,10 +19,11 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHolder> {
 
-    private List<Post> postList = Collections.emptyList();
+    private List<PostDetail> postList = Collections.emptyList();
 
-    public void setPostList(List<Post> postList) {
+    public void setPostList(List<PostDetail> postList) {
         this.postList = postList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -33,9 +34,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Post post = postList.get(position);
-        Glide.with(holder.postImage.getContext()).load("https://lh3.googleusercontent.com/uMUf2PLg4wcuyzXox8sScHWeUzcuvI7jMfT1GjOXp2_GDol5bBYEL1988xGXVzu37OM=w300").into(holder.postImage);
-        holder.postName.setText(postList.get(position).getTumblelog().getName());
+        Glide.with(holder.postImage.getContext()).load(postList.get(position).getUrl()).into(holder.postImage);
+        holder.postName.setText(postList.get(position).getUrl());
     }
 
     @Override
