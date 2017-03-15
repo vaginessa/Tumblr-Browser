@@ -7,12 +7,24 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PostDetail {
 
+    String id;
     String url;
-    String photo;
     String date;
-//    String title;
+    String type;
 
-//    @SerializedName(photo-)
-//    String photoURL;
+    public String getId() {
+        return id;
+    }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

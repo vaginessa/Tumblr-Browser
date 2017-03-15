@@ -20,7 +20,10 @@ import java.util.List;
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHolder> {
 
     private List<Post> postList = Collections.emptyList();
-    private Post post;
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,9 +33,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        post = postList.get(position);
-        Glide.with(holder.postImage.getContext()).load("https://lh3.googleusercontent.com/uMUf2PLg4wcuyzXox8sScHWeUzcuvI7jMfT1GjOXp2_GDol5bBYEL1988xGXVzu37OM=w300");
-        holder.postName.setText(post.getTumblelog().getName());
+        Post post = postList.get(position);
+        Glide.with(holder.postImage.getContext()).load("https://lh3.googleusercontent.com/uMUf2PLg4wcuyzXox8sScHWeUzcuvI7jMfT1GjOXp2_GDol5bBYEL1988xGXVzu37OM=w300").into(holder.postImage);
+        holder.postName.setText(postList.get(position).getTumblelog().getName());
     }
 
     @Override
