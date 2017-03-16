@@ -28,9 +28,15 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.onItemClickActionListener = onItemClickActionListener;
     }
 
-    public void setPostList(List<Post> postList) {
-        this.postList = postList.get(0).getPosts();
+
+
+    public void setPostList(List<PostDetail> postList) {
+        this.postList = postList;
         notifyDataSetChanged();
+    }
+
+    public List<PostDetail> getPostList() {
+        return postList;
     }
 
     @Override
