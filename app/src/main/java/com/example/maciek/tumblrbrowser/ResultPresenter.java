@@ -74,7 +74,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 
 
     public static JsonElement fetchUserData(String userName) throws IOException {
-        String stringUrl = "https://" + userName + ".tumblr.com/api/read/json/?type=text";
+        String stringUrl = "https://" + userName + ".tumblr.com/api/read/json/";
         InputStream inputStream = getInputStream(stringUrl);
         String jsonString = convertStreamToString(inputStream);
         jsonString = jsonString.substring(22, jsonString.length() - 2);

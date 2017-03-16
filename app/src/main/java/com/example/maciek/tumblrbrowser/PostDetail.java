@@ -10,6 +10,7 @@ public class PostDetail {
     String id;
     @SerializedName("photo-url-400")
     String photoUrl;
+    String url;
     String date;
     String type;
     @SerializedName("photo-caption")
@@ -17,6 +18,15 @@ public class PostDetail {
     @SerializedName("regular-body")
     String regularText;
 
+    String slug;
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 
     public String getId() {
         return id;
