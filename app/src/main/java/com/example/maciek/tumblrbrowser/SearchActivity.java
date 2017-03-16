@@ -19,6 +19,8 @@ public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.search_image_button)
     ImageButton imageButton;
+    @BindView(R.id.studious)
+    Button button;
 
 
     @Override
@@ -26,6 +28,13 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchEditText.setText("studiousmedic");
+            }
+        });
 
 
 

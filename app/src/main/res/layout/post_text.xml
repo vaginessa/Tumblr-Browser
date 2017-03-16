@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text_post_text"
-        android:textSize="60sp"
-        android:fontFamily="serif"
+        android:clickable="true"
+        android:id="@+id/text_post_slug"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:maxLines="5"
+        android:textSize="25sp" />
 
     <TextView
-        android:textSize="10sp"
-        android:gravity="right"
-        android:layout_below="@+id/text_post_text"
         android:id="@+id/text_post_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_post_slug"
+        android:gravity="right"
+        android:textSize="10sp" />
 
     <TextView
-        android:background="@color/colorPrimaryDark"
-        android:layout_below="@+id/text_post_date"
         android:layout_width="match_parent"
-        android:layout_height="5dp" />
+        android:layout_height="5dp"
+        android:layout_below="@+id/text_post_date"
+        android:background="@color/colorPrimaryDark" />
 
 </RelativeLayout>

@@ -38,8 +38,8 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 //                    Log.d("result", post.toString());
 
                     JsonElement userData = fetchUserData(name);
-                    JsonArray userPosts = getPostsFromJSON(userData);
-                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
+//                    JsonArray userPosts = getPostsFromJSON(userData);
+//                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
                     Gson gson = new Gson();
                     Post post = gson.fromJson(userData.toString(), Post.class);
                     getView().setPostDetailOnMainThread(post);
