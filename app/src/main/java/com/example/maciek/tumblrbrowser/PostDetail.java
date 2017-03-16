@@ -16,7 +16,7 @@ public class PostDetail {
     String photoText;
     @SerializedName("regular-body")
     String regularText;
-    
+
 
     public String getId() {
         return id;
@@ -26,9 +26,7 @@ public class PostDetail {
         return photoText;
     }
 
-    public String getRegularText() {
-        return regularText;
-    }
+    public String getRegularText() { return regularText; }
 
     public String getPhotoUrl() {
         return photoUrl;

@@ -38,8 +38,8 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 //                    Log.d("result", post.toString());
 
                     JsonElement userData = fetchUserData(name);
-                    JsonArray userPosts = getPostsFromJSON(userData);
-                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
+//                    JsonArray userPosts = getPostsFromJSON(userData);
+//                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
                     Gson gson = new Gson();
                     Post post = gson.fromJson(userData.toString(), Post.class);
                     getView().setPostDetailOnMainThread(post);
@@ -74,7 +74,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 
 
     public static JsonElement fetchUserData(String userName) throws IOException {
-        String stringUrl = "https://" + userName + ".tumblr.com/api/read/json/";
+        String stringUrl = "https://" + userName + ".tumblr.com/api/read/json/?type=text";
         InputStream inputStream = getInputStream(stringUrl);
         String jsonString = convertStreamToString(inputStream);
         jsonString = jsonString.substring(22, jsonString.length() - 2);

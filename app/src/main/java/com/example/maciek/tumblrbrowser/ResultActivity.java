@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -25,7 +27,6 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> {
 
     public static final String NAME_SEARCH = "name_search";
     ResultAdapter adapter;
-
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;

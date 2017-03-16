@@ -47,7 +47,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else {
             PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
             String url = postList.get(position).getPhotoUrl();
-//            url = url.replace("\\", "");
+            url = url.replace("\\", "");
             Glide.with(photoViewHolder.imagePhotoPost.getContext()).load(url).into(photoViewHolder.imagePhotoPost);
             photoViewHolder.textPhotoPost.setText(postList.get(position).getPhotoText());
             photoViewHolder.datePhotoPost.setText(postList.get(position).getDate());
@@ -56,7 +56,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (postList.get(position).getType()=="regular"){
+        if (postList.get(position).getType().equals("regular")){
             return TEXT_POST;
         } else {
             return PHOTO_POST;
