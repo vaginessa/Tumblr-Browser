@@ -77,7 +77,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
         String stringUrl = "https://" + userName + ".tumblr.com/api/read/json/";
         InputStream inputStream = getInputStream(stringUrl);
         String jsonString = convertStreamToString(inputStream);
-        jsonString = jsonString.substring(22, jsonString.length() -2);
+        jsonString = jsonString.substring(22, jsonString.length() - 2);
         return new JsonParser().parse(jsonString);
     }
 

@@ -12,15 +12,23 @@ public class PostDetail {
     String photoUrl;
     String date;
     String type;
+    @SerializedName("photo-caption")
+    String photoText;
+    @SerializedName("regular-body")
+    String regularText;
+    
 
     public String getId() {
         return id;
     }
 
-//    public String getUrl() {
-//        return url;
-//    }
+    public String getPhotoText() {
+        return photoText;
+    }
 
+    public String getRegularText() {
+        return regularText;
+    }
 
     public String getPhotoUrl() {
         return photoUrl;
