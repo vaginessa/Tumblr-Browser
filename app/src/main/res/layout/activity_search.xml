@@ -45,13 +45,17 @@
 
             />
 
-        <Button
-            android:id="@+id/studious"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="studiousmedic" />
+
 
     </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_below="@+id/search_image_button"
+        android:layout_alignParentRight="true"
+        android:id="@+id/studious"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="studiousmedic" />
 
     <ImageView
         android:id="@+id/t_icon_2"
@@ -60,4 +64,57 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="73dp"
         android:background="@drawable/ic_search_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radio_group"
+
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox_radio_group"
+        android:layout_below="@+id/text_input_layout"
+        android:text="Search by post type!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RadioGroup
+        android:visibility="gone"
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp">
+
+
+        <RadioButton
+            android:textSize="20sp"
+            android:id="@+id/text_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+        <RadioButton
+            android:textSize="20sp"
+            android:id="@+id/photo_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="photo" />
+
+        <RadioButton
+            android:textSize="20sp"
+            android:id="@+id/video_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="video" />
+
+        <RadioButton
+            android:textSize="20sp"
+            android:id="@+id/audio_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="audio" />
+
+
+    </RadioGroup>
 </RelativeLayout>

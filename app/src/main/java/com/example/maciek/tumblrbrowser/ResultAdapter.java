@@ -55,12 +55,17 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == TEXT_POST) {
-            TextViewHolder textViewHolder = (TextViewHolder) holder;
-            textViewHolder.slugPostText.setText(postList.get(position).getSlug().replace("-", " ") + "...");
-            textViewHolder.dateTextPost.setText("Poseted on: " + postList.get(position).getDate());
-            textViewHolder.typeTextPost.setText("Type: " + postList.get(position).getType());
-            textViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        if (getItemViewType(position) == PHOTO_POST) {
+
+            PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
+            String url = postList.get(position).getPhotoUrl();
+            //TODO zfixować replace
+//            url = url.replace("\\", "");
+            Glide.with(photoViewHolder.imagePhotoPost.getContext()).load(url).into(photoViewHolder.imagePhotoPost);
+            photoViewHolder.slugPhotoPost.setText(postList.get(position).getSlug().replace("-", " ") + "...");
+            photoViewHolder.datePhotoPost.setText("Poseted on: " + postList.get(position).getDate());
+            photoViewHolder.typePhotoPost.setText("Type: " + postList.get(position).getType());
+            photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickActionListener != null) {
@@ -68,6 +73,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                 }
             });
+
         } else if (getItemViewType(position) == VIDEO_POST) {
             VideoViewHolder videoViewHolder = (VideoViewHolder) holder;
             videoViewHolder.dateVideoPost.setText("Poseted on: " + postList.get(position).getDate());
@@ -83,15 +89,11 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
 
         } else {
-            PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
-            String url = postList.get(position).getPhotoUrl();
-            //TODO zfixować replace
-            url = url.replace("\\", "");
-            Glide.with(photoViewHolder.imagePhotoPost.getContext()).load(url).into(photoViewHolder.imagePhotoPost);
-            photoViewHolder.slugPhotoPost.setText(postList.get(position).getSlug().replace("-", " ") + "...");
-            photoViewHolder.datePhotoPost.setText("Poseted on: " + postList.get(position).getDate());
-            photoViewHolder.typePhotoPost.setText("Type: " + postList.get(position).getType());
-            photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            TextViewHolder textViewHolder = (TextViewHolder) holder;
+            textViewHolder.slugPostText.setText(postList.get(position).getSlug().replace("-", " ") + "...");
+            textViewHolder.dateTextPost.setText("Poseted on: " + postList.get(position).getDate());
+            textViewHolder.typeTextPost.setText("Type: " + postList.get(position).getType());
+            textViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickActionListener != null) {
