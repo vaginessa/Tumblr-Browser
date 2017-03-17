@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.ViewFlipper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,10 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
 
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.view_flipper)
+    ViewFlipper viewFlipper;
+
 
 
 
@@ -69,10 +76,14 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
     }
 
     private void dataLoading(String name, String type) {
         getPresenter().getDataAsync(name, type);
+        viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(swipeRefreshLayout));
+
     }
 
     public static Intent createIntent(Context context, String name, String type) {

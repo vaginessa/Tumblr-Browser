@@ -19,11 +19,11 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int VIDEO_POST = 3;
     private List<PostDetail> postList = Collections.emptyList();
     private OnItemClickActionListener onItemClickActionListener;
     private static final int PHOTO_POST = 1;
     private static final int TEXT_POST = 2;
+    private static final int VIDEO_POST = 3;
 
     public void setOnItemClickActionListener(OnItemClickActionListener onItemClickActionListener) {
         this.onItemClickActionListener = onItemClickActionListener;
@@ -77,7 +77,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (getItemViewType(position) == VIDEO_POST) {
             VideoViewHolder videoViewHolder = (VideoViewHolder) holder;
             videoViewHolder.dateVideoPost.setText("Poseted on: " + postList.get(position).getDate());
-            videoViewHolder.slugVideoPost.setText(postList.get(position).getDate());
+            videoViewHolder.slugVideoPost.setText(postList.get(position).getSlug());
             videoViewHolder.typeVideoPost.setText("Type: " + postList.get(position).getType());
             videoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

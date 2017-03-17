@@ -2,6 +2,7 @@ package com.example.maciek.tumblrbrowser;
 
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -26,6 +27,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
     private String resultRaw;
     private String result;
 
+
     public void getDataAsync(String name, String type) {
         new Thread() {
             @Override
@@ -37,6 +39,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
                     Gson gson = new Gson();
                     Post post = gson.fromJson(userData.toString(), Post.class);
                     getView().setPostDetailOnMainThread(post);
+
 
 
                 } catch (IOException e) {
