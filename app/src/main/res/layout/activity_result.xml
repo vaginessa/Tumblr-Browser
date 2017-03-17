@@ -5,7 +5,7 @@
     android:id="@+id/activity_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maciek.tumblrbrowser.ResultActivity">
+    tools:context="com.brodowski.maciek.tumblrbrowser.ResultActivity">
 
     <ViewFlipper
         android:id="@+id/view_flipper"

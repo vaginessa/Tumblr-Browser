@@ -1,4 +1,4 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Maciek on 2017-03-13.
  */
-public class PostDetail implements Parcelable {
+public class PostDetails implements Parcelable {
 
     String id;
     @SerializedName("photo-url-400")
@@ -24,7 +24,7 @@ public class PostDetail implements Parcelable {
 
     String slug;
 
-    protected PostDetail(Parcel in) {
+    protected PostDetails(Parcel in) {
         id = in.readString();
         photoUrl = in.readString();
         url = in.readString();
@@ -35,15 +35,15 @@ public class PostDetail implements Parcelable {
         slug = in.readString();
     }
 
-    public static final Creator<PostDetail> CREATOR = new Creator<PostDetail>() {
+    public static final Creator<PostDetails> CREATOR = new Creator<PostDetails>() {
         @Override
-        public PostDetail createFromParcel(Parcel in) {
-            return new PostDetail(in);
+        public PostDetails createFromParcel(Parcel in) {
+            return new PostDetails(in);
         }
 
         @Override
-        public PostDetail[] newArray(int size) {
-            return new PostDetail[size];
+        public PostDetails[] newArray(int size) {
+            return new PostDetails[size];
         }
     };
 

@@ -1,8 +1,4 @@
-package com.example.maciek.tumblrbrowser;
-
-import android.util.Log;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
+package com.brodowski.maciek.tumblrbrowser;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -12,7 +8,6 @@ import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import nucleus.presenter.Presenter;
@@ -37,7 +32,7 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 //                    JsonArray userPosts = getPostsFromJSON(userData);
 //                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
                     Gson gson = new Gson();
-                    Post post = gson.fromJson(userData.toString(), Post.class);
+                    TumblrPost post = gson.fromJson(userData.toString(), TumblrPost.class);
                     getView().setPostDetailOnMainThread(post);
 
 

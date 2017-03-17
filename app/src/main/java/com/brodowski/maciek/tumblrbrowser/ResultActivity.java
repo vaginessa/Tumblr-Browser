@@ -1,4 +1,4 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,20 +9,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ViewFlipper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import nucleus.factory.RequiresPresenter;
 import nucleus.view.NucleusAppCompatActivity;
 
@@ -33,7 +26,7 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     public static final String NAME_SEARCH = "name_search";
     private static final String TYPE_SEARCH = "type_search";
     ResultAdapter adapter;
-    Post post;
+    TumblrPost post;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -93,11 +86,11 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         return intent;
     }
 
-    public void setPostDetailOnMainThread(Post post) {
+    public void setPostDetailOnMainThread(TumblrPost post) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.setPostList(post.getPosts());
+                adapter.setPostDetailsList(post.getPosts());
             }
         });
     }
@@ -125,13 +118,13 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(SAVE_LIST, new ArrayList<>(adapter.getPostList()));
+        outState.putParcelableArrayList(SAVE_LIST, new ArrayList<>(adapter.getPostDetailsList()));
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        List<PostDetail> parcelableArrayList = savedInstanceState.getParcelableArrayList(SAVE_LIST);
-        adapter.setPostList(parcelableArrayList);
+        List<PostDetails> parcelableArrayList = savedInstanceState.getParcelableArrayList(SAVE_LIST);
+        adapter.setPostDetailsList(parcelableArrayList);
         super.onRestoreInstanceState(savedInstanceState);
     }
 

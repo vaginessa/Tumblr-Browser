@@ -1,4 +1,4 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 /**
  * Created by Maciek on 2017-03-13.

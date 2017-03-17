@@ -1,4 +1,4 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
