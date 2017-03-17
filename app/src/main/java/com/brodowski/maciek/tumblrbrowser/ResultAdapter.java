@@ -1,10 +1,9 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,24 +18,24 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int VIDEO_POST = 3;
-    private List<PostDetail> postList = Collections.emptyList();
+    private List<PostDetails> postDetailsList = Collections.emptyList();
     private OnItemClickActionListener onItemClickActionListener;
     private static final int PHOTO_POST = 1;
     private static final int TEXT_POST = 2;
+    private static final int VIDEO_POST = 3;
 
     public void setOnItemClickActionListener(OnItemClickActionListener onItemClickActionListener) {
         this.onItemClickActionListener = onItemClickActionListener;
     }
 
 
-    public void setPostList(List<PostDetail> postList) {
-        this.postList = postList;
+    public void setPostDetailsList(List<PostDetails> postDetailsList) {
+        this.postDetailsList = postDetailsList;
         notifyDataSetChanged();
     }
 
-    public List<PostDetail> getPostList() {
-        return postList;
+    public List<PostDetails> getPostDetailsList() {
+        return postDetailsList;
     }
 
     @Override
@@ -55,47 +54,49 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == TEXT_POST) {
-            TextViewHolder textViewHolder = (TextViewHolder) holder;
-            textViewHolder.slugPostText.setText(postList.get(position).getSlug().replace("-", " ") + "...");
-            textViewHolder.dateTextPost.setText("Poseted on: " + postList.get(position).getDate());
-            textViewHolder.typeTextPost.setText("Type: " + postList.get(position).getType());
-            textViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        if (getItemViewType(position) == PHOTO_POST) {
+
+            PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
+            String url = postDetailsList.get(position).getPhotoUrl();
+            //TODO zfixować replace
+//            url = url.replace("\\", "");
+            Glide.with(photoViewHolder.imagePhotoPost.getContext()).load(url).into(photoViewHolder.imagePhotoPost);
+            photoViewHolder.slugPhotoPost.setText(postDetailsList.get(position).getSlug().replace("-", " ") + "...");
+            photoViewHolder.datePhotoPost.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            photoViewHolder.typePhotoPost.setText("Type: " + postDetailsList.get(position).getType());
+            photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickActionListener != null) {
-                        onItemClickActionListener.onItemClick(postList.get(position).getUrl().replace("\\", ""));
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
                     }
                 }
             });
+
         } else if (getItemViewType(position) == VIDEO_POST) {
             VideoViewHolder videoViewHolder = (VideoViewHolder) holder;
-            videoViewHolder.dateVideoPost.setText("Poseted on: " + postList.get(position).getDate());
-            videoViewHolder.slugVideoPost.setText(postList.get(position).getDate());
-            videoViewHolder.typeVideoPost.setText("Type: " + postList.get(position).getType());
+            videoViewHolder.dateVideoPost.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            videoViewHolder.slugVideoPost.setText(postDetailsList.get(position).getSlug());
+            videoViewHolder.typeVideoPost.setText("Type: " + postDetailsList.get(position).getType());
             videoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickActionListener != null) {
-                        onItemClickActionListener.onItemClick(postList.get(position).getUrl().replace("\\", ""));
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
                     }
                 }
             });
 
         } else {
-            PhotoViewHolder photoViewHolder = (PhotoViewHolder) holder;
-            String url = postList.get(position).getPhotoUrl();
-            //TODO zfixować replace
-            url = url.replace("\\", "");
-            Glide.with(photoViewHolder.imagePhotoPost.getContext()).load(url).into(photoViewHolder.imagePhotoPost);
-            photoViewHolder.slugPhotoPost.setText(postList.get(position).getSlug().replace("-", " ") + "...");
-            photoViewHolder.datePhotoPost.setText("Poseted on: " + postList.get(position).getDate());
-            photoViewHolder.typePhotoPost.setText("Type: " + postList.get(position).getType());
-            photoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            TextViewHolder textViewHolder = (TextViewHolder) holder;
+            textViewHolder.slugPostText.setText(postDetailsList.get(position).getSlug().replace("-", " ") + "...");
+            textViewHolder.dateTextPost.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            textViewHolder.typeTextPost.setText("Type: " + postDetailsList.get(position).getType());
+            textViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onItemClickActionListener != null) {
-                        onItemClickActionListener.onItemClick(postList.get(position).getUrl().replace("\\", ""));
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
                     }
                 }
             });
@@ -104,18 +105,18 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (postList.get(position).getType().equals("regular")) {
-            return TEXT_POST;
-        } else if (postList.get(position).getType().equals("video")) {
+        if (postDetailsList.get(position).getType().equals("photo")) {
+            return PHOTO_POST;
+        } else if (postDetailsList.get(position).getType().equals("video")) {
             return VIDEO_POST;
         } else {
-            return PHOTO_POST;
+            return TEXT_POST;
         }
     }
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return postDetailsList.size();
     }
 
 

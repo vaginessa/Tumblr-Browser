@@ -1,4 +1,4 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,14 +7,14 @@ import java.util.List;
 /**
  * Created by Maciek on 2017-03-10.
  */
-public class Post {
+public class TumblrPost {
 
     private Tumblelog tumblelog;
 
     @SerializedName("posts-total")
     private int postsTotal;
 
-    private List<PostDetail> posts;
+    private List<PostDetails> posts;
 
     public Tumblelog getTumblelog() {
         return tumblelog;
@@ -24,7 +24,7 @@ public class Post {
         return postsTotal;
     }
 
-    public List<PostDetail> getPosts() {
+    public List<PostDetails> getPosts() {
         return posts;
     }
 

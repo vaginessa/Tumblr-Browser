@@ -1,19 +1,18 @@
-package com.example.maciek.tumblrbrowser;
+package com.brodowski.maciek.tumblrbrowser;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,14 +25,23 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
 
     private static final String SAVE_LIST = "save_list";
     public static final String NAME_SEARCH = "name_search";
+    private static final String TYPE_SEARCH = "type_search";
     ResultAdapter adapter;
-    Post post;
+    TumblrPost post;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.view_flipper)
+    ViewFlipper viewFlipper;
+
+//    @BindView(R.id.exception_layout)
+//    RelativeLayout exceptionLayout;
+
+
 
 
     @Override
@@ -42,6 +50,7 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         setContentView(R.layout.activity_result);
         ButterKnife.bind(this);
         String name = getIntent().getStringExtra(NAME_SEARCH);
+        String type = getIntent().getStringExtra(TYPE_SEARCH);
 
         adapter = new ResultAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -53,34 +62,39 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(name);
 
-        if (savedInstanceState == null) {
-            dataLoading(name);
-        }
+//        if (savedInstanceState == null) {
+                        dataLoading(name, type);
+//        }
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                dataLoading(name);
+                dataLoading(name,type);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
     }
 
-    private void dataLoading(String name) {
-        getPresenter().getDataAsync(name);
+    private void dataLoading(String name, String type) {
+        getPresenter().getDataAsync(name, type);
+        viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(swipeRefreshLayout));
+
     }
 
-    public static Intent createIntent(Context context, String name) {
+    public static Intent createIntent(Context context, String name, String type) {
         Intent intent = new Intent(context, ResultActivity.class);
         intent.putExtra(NAME_SEARCH, name);
+        intent.putExtra(TYPE_SEARCH, type);
         return intent;
     }
 
-    public void setPostDetailOnMainThread(Post post) {
+    public void setPostDetailOnMainThread(TumblrPost post) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.setPostList(post.getPosts());
+                adapter.setPostDetailsList(post.getPosts());
             }
         });
     }
@@ -108,13 +122,15 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(SAVE_LIST, new ArrayList<>(adapter.getPostList()));
+        outState.putParcelableArrayList(SAVE_LIST, new ArrayList<>(adapter.getPostDetailsList()));
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        List<PostDetail> parcelableArrayList = savedInstanceState.getParcelableArrayList(SAVE_LIST);
-        adapter.setPostList(parcelableArrayList);
+        List<PostDetails> parcelableArrayList = savedInstanceState.getParcelableArrayList(SAVE_LIST);
+        adapter.setPostDetailsList(parcelableArrayList);
         super.onRestoreInstanceState(savedInstanceState);
     }
+
+
 }
