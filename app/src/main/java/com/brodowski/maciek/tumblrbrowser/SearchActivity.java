@@ -26,9 +26,6 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_image_button)
     ImageButton imageButton;
 
-    @BindView(R.id.studious)
-    Button button;
-
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
 
@@ -50,12 +47,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchEditText.setText("studiousmedic");
-            }
-        });
 
 
     }

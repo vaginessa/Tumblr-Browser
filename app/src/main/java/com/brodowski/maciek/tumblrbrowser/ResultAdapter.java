@@ -105,12 +105,12 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        if (postDetailsList.get(position).getType().equals("regular")) {
-            return TEXT_POST;
+        if (postDetailsList.get(position).getType().equals("photo")) {
+            return PHOTO_POST;
         } else if (postDetailsList.get(position).getType().equals("video")) {
             return VIDEO_POST;
         } else {
-            return PHOTO_POST;
+            return TEXT_POST;
         }
     }
 

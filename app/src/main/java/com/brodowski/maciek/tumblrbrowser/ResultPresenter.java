@@ -1,5 +1,9 @@
 package com.brodowski.maciek.tumblrbrowser;
 
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -32,15 +36,19 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 //                    JsonArray userPosts = getPostsFromJSON(userData);
 //                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
                     Gson gson = new Gson();
-                    TumblrPost post = gson.fromJson(userData.toString(), TumblrPost.class);
-                    getView().setPostDetailOnMainThread(post);
+                    TumblrPost tumblrPost = gson.fromJson(userData.toString(), TumblrPost.class);
 
-
-
-                } catch (IOException e) {
+                    if (tumblrPost != null) {
+                        getView().setPostDetailOnMainThread(tumblrPost);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
-
-
+                    RelativeLayout exceptionLayout = null;
+                    if (getView()!= null){
+                    exceptionLayout = (RelativeLayout) getView().findViewById(R.id.exception_layout);}
+                    if (exceptionLayout != null) {
+                        getView().viewFlipper.setDisplayedChild(getView().viewFlipper.indexOfChild(exceptionLayout));
+                    }
                 }
 
             }

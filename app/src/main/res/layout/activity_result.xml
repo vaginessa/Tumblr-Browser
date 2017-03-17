@@ -29,5 +29,30 @@
                 app:layoutManager="LinearLayoutManager"></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
 
+        <RelativeLayout
+            android:id="@+id/exception_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_above="@+id/exception_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/error_image" />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/exception_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/exception_text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
     </ViewFlipper>
 </RelativeLayout>

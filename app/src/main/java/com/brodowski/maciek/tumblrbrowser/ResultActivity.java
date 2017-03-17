@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     @BindView(R.id.view_flipper)
     ViewFlipper viewFlipper;
 
+//    @BindView(R.id.exception_layout)
+//    RelativeLayout exceptionLayout;
+
 
 
 
@@ -58,9 +62,9 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(name);
 
-        if (savedInstanceState == null) {
-            dataLoading(name, type);
-        }
+//        if (savedInstanceState == null) {
+                        dataLoading(name, type);
+//        }
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
