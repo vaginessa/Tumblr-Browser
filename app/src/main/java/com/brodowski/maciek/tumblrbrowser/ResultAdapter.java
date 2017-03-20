@@ -20,6 +20,13 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<PostDetails> postDetailsList = Collections.emptyList();
     private OnItemClickActionListener onItemClickActionListener;
+
+    public PostDetails getPostDetails() {
+        return postDetails;
+    }
+
+    private PostDetails postDetails;
+
     private static final int PHOTO_POST = 1;
     private static final int TEXT_POST = 2;
     private static final int VIDEO_POST = 3;
