@@ -58,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
         String type = checkBox.isChecked() ? apiKeysMap.get(checkRadioId) : null;
 
         startActivity(ResultActivity.createIntent(SearchActivity.this,
-                searchEditText.getText().toString(), type));
+                searchEditText.getText().toString().trim(), type));
     }
 
     @OnCheckedChanged(R.id.checkbox_radio_group)
