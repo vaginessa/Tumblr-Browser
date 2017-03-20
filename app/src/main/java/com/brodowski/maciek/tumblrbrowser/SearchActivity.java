@@ -46,9 +46,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-
-
-
     }
 
     @OnClick(R.id.search_image_button)
@@ -58,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         String type = checkBox.isChecked() ? apiKeysMap.get(checkRadioId) : null;
 
         startActivity(ResultActivity.createIntent(SearchActivity.this,
-                searchEditText.getText().toString(), type));
+                searchEditText.getText().toString().trim(), type));
     }
 
     @OnCheckedChanged(R.id.checkbox_radio_group)

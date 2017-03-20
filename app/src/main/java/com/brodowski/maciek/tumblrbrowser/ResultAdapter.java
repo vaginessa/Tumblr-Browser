@@ -20,9 +20,21 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<PostDetails> postDetailsList = Collections.emptyList();
     private OnItemClickActionListener onItemClickActionListener;
+
+    public PostDetails getPostDetails() {
+        return postDetails;
+    }
+
+    private PostDetails postDetails;
+
     private static final int PHOTO_POST = 1;
     private static final int TEXT_POST = 2;
     private static final int VIDEO_POST = 3;
+    private static final int AUDIO_POST = 4;
+    private static final int LINK_POST = 5;
+    private static final int QUOTE_POST = 6;
+
+
 
     public void setOnItemClickActionListener(OnItemClickActionListener onItemClickActionListener) {
         this.onItemClickActionListener = onItemClickActionListener;
@@ -46,6 +58,15 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (viewType == VIDEO_POST) {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_video, parent, false);
             return new VideoViewHolder(layout);
+        } else if (viewType == AUDIO_POST) {
+            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_audio, parent, false);
+            return new AudioViewHolder(layout);
+        } else if (viewType == LINK_POST) {
+            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_link, parent, false);
+            return new LinkViewHolder(layout);
+        } else if (viewType == QUOTE_POST) {
+            View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_quote, parent, false);
+            return new QuoteViewHolder(layout);
         } else {
             View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_text, parent, false);
             return new TextViewHolder(layout);
@@ -86,6 +107,45 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                 }
             });
+        } else if (getItemViewType(position) == AUDIO_POST) {
+            AudioViewHolder audioViewHolder = (AudioViewHolder) holder;
+            audioViewHolder.dateAudio.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            audioViewHolder.slugAudio.setText(postDetailsList.get(position).getSlug());
+            audioViewHolder.typeAudio.setText("Type: " + postDetailsList.get(position).getType());
+            audioViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickActionListener != null) {
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
+                    }
+                }
+            });
+        } else if (getItemViewType(position) == LINK_POST) {
+            LinkViewHolder linkViewHolder = (LinkViewHolder) holder;
+            linkViewHolder.dateLink.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            linkViewHolder.slugLink.setText(postDetailsList.get(position).getSlug());
+            linkViewHolder.typeLink.setText("Type: " + postDetailsList.get(position).getType());
+            linkViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickActionListener != null) {
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
+                    }
+                }
+            });
+        } else if (getItemViewType(position) == QUOTE_POST) {
+            QuoteViewHolder quoteViewHolder = (QuoteViewHolder) holder;
+            quoteViewHolder.dateQuote.setText("Poseted on: " + postDetailsList.get(position).getDate());
+            quoteViewHolder.slugQuote.setText(postDetailsList.get(position).getSlug());
+            quoteViewHolder.typeQuote.setText("Type: " + postDetailsList.get(position).getType());
+            quoteViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickActionListener != null) {
+                        onItemClickActionListener.onItemClick(postDetailsList.get(position).getUrl().replace("\\", ""));
+                    }
+                }
+            });
 
         } else {
             TextViewHolder textViewHolder = (TextViewHolder) holder;
@@ -109,6 +169,12 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return PHOTO_POST;
         } else if (postDetailsList.get(position).getType().equals("video")) {
             return VIDEO_POST;
+        } else if (postDetailsList.get(position).getType().equals("audio")) {
+            return AUDIO_POST;
+        } else if (postDetailsList.get(position).getType().equals("link")) {
+            return LINK_POST;
+        } else if (postDetailsList.get(position).getType().equals("quote")) {
+            return QUOTE_POST;
         } else {
             return TEXT_POST;
         }
@@ -163,6 +229,53 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             dateVideoPost = (TextView) itemView.findViewById(R.id.video_post_date);
             typeVideoPost = (TextView) itemView.findViewById(R.id.video_post_type);
 
-        }}
+        }
+    }
+
+    class AudioViewHolder extends RecyclerView.ViewHolder {
+
+        TextView slugAudio;
+        TextView dateAudio;
+        TextView typeAudio;
+
+        public AudioViewHolder(View itemView) {
+            super(itemView);
+            slugAudio = (TextView) itemView.findViewById(R.id.audio_post_slug);
+            dateAudio = (TextView) itemView.findViewById(R.id.audio_post_date);
+            typeAudio = (TextView) itemView.findViewById(R.id.audio_post_type);
+
+        }
+    }
+
+    class LinkViewHolder extends RecyclerView.ViewHolder {
+
+        TextView slugLink;
+        TextView dateLink;
+        TextView typeLink;
+
+        public LinkViewHolder(View itemView) {
+            super(itemView);
+            slugLink = (TextView) itemView.findViewById(R.id.link_post_slug);
+            dateLink = (TextView) itemView.findViewById(R.id.link_post_date);
+            typeLink = (TextView) itemView.findViewById(R.id.link_post_type);
+
+        }
+    }
+
+    class QuoteViewHolder extends RecyclerView.ViewHolder {
+
+        TextView slugQuote;
+        TextView dateQuote;
+        TextView typeQuote;
+
+        public QuoteViewHolder(View itemView) {
+            super(itemView);
+            slugQuote = (TextView) itemView.findViewById(R.id.quote_post_slug);
+            dateQuote = (TextView) itemView.findViewById(R.id.quote_post_date);
+            typeQuote = (TextView) itemView.findViewById(R.id.quote_post_type);
+
+        }
+    }
+
 
 }

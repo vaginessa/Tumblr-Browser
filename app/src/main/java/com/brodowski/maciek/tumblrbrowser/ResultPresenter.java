@@ -1,5 +1,7 @@
 package com.brodowski.maciek.tumblrbrowser;
 
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -25,29 +27,46 @@ public class ResultPresenter extends Presenter<ResultActivity> {
 
     private String resultRaw;
     private String result;
+    private TumblrPost tumblrPost;
+    private boolean isEmpty = false;
 
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public TumblrPost getTumblrPost() {
+        return tumblrPost;
+    }
 
     public void getDataAsync(String name, String type) {
         new Thread() {
             @Override
             public void run() {
+                RelativeLayout exceptionLayout = null;
                 try {
                     JsonElement userData = fetchUserData(name, type);
 //                    JsonArray userPosts = getPostsFromJSON(userData);
 //                    JsonObject post1 = userPosts.get(0).getAsJsonObject();
                     Gson gson = new Gson();
-                    TumblrPost tumblrPost = gson.fromJson(userData.toString(), TumblrPost.class);
+                    tumblrPost = gson.fromJson(userData.toString(), TumblrPost.class);
 
                     if (tumblrPost != null) {
                         getView().setPostDetailOnMainThread(tumblrPost);
                     }
+
+                    if (tumblrPost.getPostsTotal()==0){
+                        getView().setNoPostImageOnMainThread();
+                    } else {
+                        getView().setSuccessLayoutOnMainThread();
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                    RelativeLayout exceptionLayout = null;
+
                     if (getView()!= null){
                     exceptionLayout = (RelativeLayout) getView().findViewById(R.id.exception_layout);}
                     if (exceptionLayout != null) {
-                        getView().viewFlipper.setDisplayedChild(getView().viewFlipper.indexOfChild(exceptionLayout));
+                        getView().setExceptionLayoutOnMainThread();
                     }
                 }
 
@@ -55,21 +74,6 @@ public class ResultPresenter extends Presenter<ResultActivity> {
         }.start();
 
     }
-
-
-//    public String getData(String name) throws IOException {
-//        String stringUrl = "https://" + name + ".tumblr.com/api/read/json/";
-//        URL url = new URL(stringUrl);
-//        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//        InputStream inputStream = urlConnection.getInputStream();
-//        return convertStreamToString(inputStream);
-//    }
-//
-//    private String convertStreamToString(java.io.InputStream is) {
-//        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-//        return s.hasNext() ? s.next() : "";
-//    }
-
 
     public static JsonElement fetchUserData(String userName, String type) throws IOException {
         if (type == null) {
