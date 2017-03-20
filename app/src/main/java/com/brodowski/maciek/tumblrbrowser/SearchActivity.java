@@ -46,9 +46,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-
-
-
     }
 
     @OnClick(R.id.search_image_button)

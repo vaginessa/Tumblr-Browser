@@ -50,14 +50,6 @@ public class ResultPresenter extends Presenter<ResultActivity> {
                     Gson gson = new Gson();
                     tumblrPost = gson.fromJson(userData.toString(), TumblrPost.class);
 
-
-
-//                    if (userPosts.size()==0){
-//                        isEmpty=true;
-//                    } else {
-//                        isEmpty=false;
-//                    }
-
                     if (tumblrPost != null) {
                         getView().setPostDetailOnMainThread(tumblrPost);
                     }
@@ -68,9 +60,6 @@ public class ResultPresenter extends Presenter<ResultActivity> {
                         getView().setSuccessLayoutOnMainThread();
                     }
 
-
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -78,7 +67,6 @@ public class ResultPresenter extends Presenter<ResultActivity> {
                     exceptionLayout = (RelativeLayout) getView().findViewById(R.id.exception_layout);}
                     if (exceptionLayout != null) {
                         getView().setExceptionLayoutOnMainThread();
-//                        getView().viewFlipper.setDisplayedChild(getView().viewFlipper.indexOfChild(exceptionLayout));
                     }
                 }
 

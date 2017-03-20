@@ -2,6 +2,7 @@ package com.brodowski.maciek.tumblrbrowser;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,10 +45,6 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     @BindView(R.id.no_posts_to_display)
     ImageView noPostImageView;
 
-//    @BindView(R.id.exception_layout)
-//    RelativeLayout exceptionLayout;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +63,7 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(name);
 
-//        if (savedInstanceState == null) {
         dataLoading(name, type);
-
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -124,8 +119,6 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
         return super.onOptionsItemSelected(item);
     }
 
-
-    //!!!!!!!!!!!!!!!!!!!!
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -161,11 +154,11 @@ public class ResultActivity extends NucleusAppCompatActivity<ResultPresenter> im
     }
 
     public void setSuccessLayoutOnMainThread() {
-  runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
-          viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(swipeRefreshLayout));
-      }
-  });
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(swipeRefreshLayout));
+            }
+        });
     }
 }
